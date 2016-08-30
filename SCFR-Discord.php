@@ -10,14 +10,30 @@ License: Private
 */
 namespace SCFRDiscord;
 
-  require_once("php/db.class.php");
-  require_once("php/api.class.php");
-  require_once("php/selector.class.php");
-  require_once("php/Keyboard.class.php");
+error_reporting(-1);
+  require_once('settings.php');
+  require_once('OAuth2/Client.php');
+  require_once('OAuth2/GrantType/IGrantType.php');
+  require_once('OAuth2/GrantType/AuthorizationCode.php');
+  require_once('controller/discord.php');
 
-    global $KEYBOARD;
-    $KEYBOARD = new Keyboard();
+    global $SCFRDiscord;
+
+    class SCFRDiscord {
+      function __construct() {
+
+      }
+
+      public function plugin_init() {
+
+      }
+    }
+
+    $SCFRDiscord = new SCFRDiscord();
+
+    $test = new controller\Discord();
+    die();
 
 
-    register_activation_hook(__FILE__, array($KEYBOARD,'plugin_init'));
+    register_activation_hook(__FILE__, array($SCFRDiscord,'plugin_init'));
 ?>
