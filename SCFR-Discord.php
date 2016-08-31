@@ -15,13 +15,17 @@ error_reporting(-1);
   require_once('OAuth2/Client.php');
   require_once('OAuth2/GrantType/IGrantType.php');
   require_once('OAuth2/GrantType/AuthorizationCode.php');
+  require_once('api/WP.php');
   require_once('controller/discord.php');
+  require_once('helper/APIReturn.php');
+  require_once('helper/DiscordUser.php');
+  require_once('listener/event.php');
 
     global $SCFRDiscord;
 
     class SCFRDiscord {
-      function __construct() {
-
+      public function __construct() {
+        $this->event = new listener\Event();
       }
 
       public function plugin_init() {
@@ -31,8 +35,6 @@ error_reporting(-1);
 
     $SCFRDiscord = new SCFRDiscord();
 
-    $test = new controller\Discord();
-    die();
 
 
     register_activation_hook(__FILE__, array($SCFRDiscord,'plugin_init'));
