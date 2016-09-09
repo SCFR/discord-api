@@ -5,6 +5,9 @@
     protected $forum_id, $discord_id;
     protected $user_info;
 
+    // @param $_id : id user
+    // @param $is_not_discord : true => Discord user | false => WP || Forum
+    // @param $is_wordpress : SI is_not_discord triggers wp or forum.
     function __construct($_id = 0, $is_not_discord = true, $is_wordpress = false) {
       global $wpdb;
       $this->db = $wpdb;

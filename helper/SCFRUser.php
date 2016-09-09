@@ -48,7 +48,7 @@ class SCFRUser {
       }
     }
 
-    print_r(getallheaders());
+  //  print_r(getallheaders());
 
   }
 

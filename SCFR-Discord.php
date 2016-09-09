@@ -10,7 +10,6 @@ License: Private
 */
 namespace SCFRDiscord;
 
-error_reporting(-1);
   require_once('settings.php');
   require_once('OAuth2/Client.php');
   require_once('OAuth2/GrantType/IGrantType.php');
@@ -18,7 +17,9 @@ error_reporting(-1);
   require_once('api/WP.php');
   require_once('controller/discord.php');
   require_once('helper/APIReturn.php');
+  require_once('helper/SCFRUser.php');
   require_once('helper/DiscordUser.php');
+  require_once('helper/Hash.php');
   require_once('listener/event.php');
 
     global $SCFRDiscord;

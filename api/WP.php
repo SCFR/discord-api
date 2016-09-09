@@ -1,5 +1,4 @@
 <?php namespace SCFRDiscord\api;
-
 class WP {
 
   function __construct() {
@@ -11,7 +10,7 @@ class WP {
   }
 
   public function setCurrentUser() {
-    $this->user = new \SCFRDiscord\api\SCFRUser();
+    $this->user = new \SCFRDiscord\helper\SCFRUser();
 
     $this->loggedIn = $this->user->check_login();
   }
@@ -38,6 +37,15 @@ class WP {
       'methods'  => 'GET',
       'callback' => array( &$this, 'do_login' ),
     ) );
+
+    \register_rest_route( $namespace, '/User/(?P<id>[a-zA-Z0-9-]+)', array(
+      'methods'  => 'GET',
+      'callback' => array( &$this, 'get_user' ),
+    ) );
+  }
+
+  public function get_user($args) {
+    return $args["id"];
   }
 
   public function register_api_forum_endpoints() {
@@ -63,22 +71,6 @@ class WP {
 
   public function do_login($args) {
 
-
-
-    $phpbb = new \WPHPBB\Controller\Phpbb();
-    $phpbb->make_phpbb_env();
-
-    if()
-
-    if($phpbb->user->data['is_registered']) {
-       return \SCFRDiscord\helper\APIReturn::message("USER_LOGGED_IN");
-    }
-    else {
-       //if ($result['status'] == LOGIN_SUCCESS) return \SCFRDiscord\helper\APIReturn::message("USER_LOGGED_IN");
-       //else return \SCFRDiscord\helper\APIReturn::message("USER_LOGGED_IN", $result['error_msg']);
-
-       return get_relevant_header();
-    }
   }
 
   public function get_user_info() {
