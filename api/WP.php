@@ -6,13 +6,6 @@ class WP {
     $this->db = $wpdb;
 
     add_action('rest_api_init',array(&$this, 'register_api_endpoints') );
-    add_action('rest_api_init',array(&$this, 'setCurrentUser') );
-  }
-
-  public function setCurrentUser() {
-    $this->user = new \SCFRDiscord\helper\SCFRUser();
-
-    $this->loggedIn = $this->user->check_login();
   }
 
   public function register_api_endpoints() {
@@ -44,8 +37,27 @@ class WP {
     ) );
   }
 
+  private function exec_if_connected($args, $callable) {
+    $error = false;
+    try { $valid = \SCFRDiscord\controller\SCFRUser::check_login($args); }
+    catch(\Exception $e) {
+      $error[] = $e->getMessage();
+    }
+    finally {
+      if($valid && !$error) return call_user_func($callable, $args);
+      else return \SCFRDiscord\helper\APIReturn::message("", $error);
+    }
+  }
+
+
+
   public function get_user($args) {
-    return $args["id"];
+    return $this->exec_if_connected($args, array(&$this, "user_info"));
+  }
+
+  private function user_info($args) {
+    $user = new \SCFRDiscord\controller\DiscordUser($args['id'], "DISCORD");
+    return \SCFRDiscord\helper\APIReturn::message($user->get_user_info());
   }
 
   public function register_api_forum_endpoints() {
@@ -70,11 +82,11 @@ class WP {
   }
 
   public function do_login($args) {
-
+    return \SCFRDiscord\controller\SCFRUser::do_login($args);
   }
 
   public function get_user_info() {
-    $user = new \SCFRDiscord\helper\DiscordUser($this->userId, true, true);
+    $user = new \SCFRDiscord\controller\DiscordUser($this->userId, true, true);
 
     return \SCFRDiscord\helper\APIReturn::message($user->get_user_info(), $this->error_connected());
   }

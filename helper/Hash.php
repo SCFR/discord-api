@@ -1,7 +1,7 @@
 <?php namespace SCFRDiscord\helper;
   class Hash {
      const HASH_METHOD = 'aes128';
-     const PRIVATE_HASH = SCFRDiscord\Settings::HASH_PRIVATE_KEY;
+     const PRIVATE_HASH = \SCFRDiscord\Settings::HASH_PRIVATE_KEY;
 
     public static function hash_player($user) {
       $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
