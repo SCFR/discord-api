@@ -11,7 +11,6 @@
       global $wpdb;
       $this->db = $wpdb;
 
-
       switch($user_type) {
         case "":
         case "DISCORD":
@@ -68,9 +67,9 @@
 
     public function get_user_info() {
       if(!$this->user_info) {
-        $sql = "SELECT f.username, d.* FROM testfo_users as f, discord_users as d WHERE d.discord_id='{$this->discord_id}' AND forum_id = user_id";
+        $sql = "SELECT f.username, d.* FROM testfo_users as f, discord_users as d WHERE d.discord_id='{$this->discord_id}' AND forum_id = user_id LIMIT 1";
         $q = $this->db->get_results($sql);
-        $this->user_info = $q;
+        $this->user_info = $q[0];
       }
 
       return $this->user_info;

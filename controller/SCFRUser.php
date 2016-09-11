@@ -72,4 +72,21 @@ class SCFRUser {
     return SELF::is_valid_token($args);
   }
 
+  public static function get_current_user_id($args = false) {
+    $valid = $error = false;
+    try {
+      $valid = SELF::is_valid_token($args);
+    }
+    catch(\Exception $e) {
+      $error = $e->getMessage();
+    }
+    finally {
+      if(!$error && $valid) {
+        $user_id = \SCFRDiscord\helper\Hash::un_hash_player($args['scfr-token']);
+        return $user_id;
+      }
+      else return $error;
+    }
+  }
+
 }
