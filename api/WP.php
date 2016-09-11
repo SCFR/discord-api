@@ -64,7 +64,7 @@ class WP {
 
   private function user_info($args) {
     $user = new \SCFRDiscord\controller\DiscordUser($args['id'], "DISCORD");
-    return \SCFRDiscord\helper\APIReturn::message($user->get_user_info());
+    return \SCFRDiscord\helper\APIReturn::try_function(array($user, "get_user_info"));
   }
 
 

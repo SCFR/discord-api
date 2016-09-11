@@ -16,10 +16,11 @@ namespace SCFRDiscord;
   require_once('OAuth2/GrantType/AuthorizationCode.php');
   require_once('api/WP.php');
   require_once('controller/discord.php');
-  require_once('helper/APIReturn.php');
   require_once('controller/SCFRUser.php');
   require_once('controller/DiscordUser.php');
+  require_once('helper/APIReturn.php');
   require_once('helper/Hash.php');
+  require_once('helper/User.php');
   require_once('listener/event.php');
 
     global $SCFRDiscord;
