@@ -6,6 +6,8 @@
     public $username, $user_colour;
     // Discord
     public $discriminator;
+    // RSI
+    public $handle, $org;
 
     protected $db;
 
@@ -18,6 +20,7 @@
       $this->db = $wpdb;
       $this->discord_id = $discord_id;
       $this->get_user_info();
+      $this->get_rsi_info();
     }
 
     private function get_user_info($_id) {
@@ -26,6 +29,27 @@
 
       foreach($user as $pp => $val)
         $this->{$pp} = $val;
+    }
+
+    // Fetches relevant data for current user.
+    // @classParam forum_id NEEDS to be set.
+    private function get_rsi_info() {
+      $sql = "SELECT pf_handle, pf_handle_public, pf_guild, pf_guild_public FROM testfo_profile_fields_data WHERE user_id='{$this->forum_id}' LIMIT 1";
+      $info = $this->db->get_row($sql);
+      $this->handle_handle($info);
+      $this->handle_org($info);
+    }
+
+    private function handle_handle($info) {
+      if($info->pf_handle_public != 1) return false;
+
+      $this->handle = $info->pf_handle;
+    }
+
+    private function handle_org($info) {
+      if($info->pf_guild_public != 1) return false;
+
+      $this->org = new Org($info->pf_guild);
     }
   }
 

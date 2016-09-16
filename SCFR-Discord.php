@@ -21,6 +21,7 @@ namespace SCFRDiscord;
   require_once('helper/APIReturn.php');
   require_once('helper/Hash.php');
   require_once('helper/User.php');
+  require_once('helper/Org.php');
   require_once('listener/event.php');
 
     global $SCFRDiscord;
