@@ -13,7 +13,9 @@
     }
 
     private function process_org() {
-        
+      $rsi = RSIAPI::get_latest_org_info($this->SSID);
+      foreach($rsi as $pp => $val)
+        $this->{$pp} = $val;
     }
 
 
