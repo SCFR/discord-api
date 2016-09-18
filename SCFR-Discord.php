@@ -15,6 +15,7 @@ namespace SCFRDiscord;
   require_once('OAuth2/GrantType/IGrantType.php');
   require_once('OAuth2/GrantType/AuthorizationCode.php');
   require_once('api/WP.php');
+  require_once('api/FrontEnd.php');
   require_once('controller/discord.php');
   require_once('controller/SCFRUser.php');
   require_once('controller/DiscordUser.php');
