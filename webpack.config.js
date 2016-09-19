@@ -13,6 +13,10 @@ module.exports = {
         //libraryTarget: "var",
         //library: "StarCitizenFR",
     },
-    module: {},
+    module: {
+      loaders: [
+        { test: /\.jpg$/, loader: "file-loader" }
+      ],
+    },
     plugins: [],
 };

@@ -14,7 +14,13 @@ else {
   <main class="row-fluid" id="content" role="main" ng-controller="DiscordMain" ui-view></main>
 
 
-
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <?php  get_footer(); ?>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
   <script src="<?php echo plugins_url("/SCFR-Discord/js/StarCitizenFR.discord.js"); ?>"></script>
   <?php  } ?>

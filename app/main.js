@@ -1,3 +1,12 @@
-require("./controller/main.js");
+var $script = require("scriptjs");
 
-require('./config/main.js');
+
+  require("!style!css!sass!./sass/discordapp.scss");
+
+
+  require("./service/User.js");
+
+  require("./controller/main.js");
+
+  require("./config/routes.js");
+  require('./config/main.js');

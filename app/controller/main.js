@@ -1,3 +1,4 @@
-app.controller("DiscordMain", ["$scope", "$state", function($scope, $state) {
+app.controller("DiscordMain", ["$scope", "$state", "discord.service.user", function($scope, $state, user) {
   console.log($state.params);
+  //ngMaterial
 }]);
