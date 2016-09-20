@@ -1,0 +1,25 @@
+<md-card>
+  <md-toolbar layout="row" class="md-hue-2">
+     <div class="md-toolbar-tools md-accent">
+       <span class="md-headline">Votre identité discord</span>
+     </div>
+   </md-toolbar>
+  <md-card-title>
+    <md-card-title-media layout layout-margin>
+      <div class="md-media-sm card-media" flex="100">
+        <img class="discord-user-avatar" src="//discordapp.com/api/users/{{user.discord.id}}/avatars/{{user.discord.avatar}}.jpg" flex="100">
+      </div>
+    </md-card-title-media>
+    <md-card-title-text>
+      <span class="md-headline" ng-if="user.discord">{{user.discord.username}} <span class="md-subhead"  ng-if="user.discord">#{{user.discord.discriminator}}</span></span>
+      <br />
+
+      <span class="description" ng-bind="status()"></span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="start"  ng-if="user.userStatus === 'USER_NO_TOKEN'">
+    <md-button class="md-primary" ng-click="getDiscordCode()">
+      <md-icon md-svg-src="{{appURL}}images/DiscordLogo.svg" style="min-width:80px;"></md-icon>
+    </md-button>
+  </md-card-actions>
+</md-card>

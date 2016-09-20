@@ -80,7 +80,7 @@ app.config(["$stateProvider", "$locationProvider", "$mdThemingProvider", functio
         '500': '#26323a',
         '600': '#1c252b',
         '700': '#12171b',
-        '800': '#080a0c',
+        '800': '#282e31',
         '900': '#000000',
         'A100': '#638296',
         'A200': '#718ea2',

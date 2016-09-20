@@ -11,7 +11,7 @@ else {
   </script>
 
   <base href="/">
-  <main class="row-fluid" id="content" role="main" ng-controller="DiscordMain" ui-view></main>
+  <main class="row-fluid" id="content" role="main" ui-view></main>
 
 
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">

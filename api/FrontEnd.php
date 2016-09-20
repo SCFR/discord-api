@@ -78,8 +78,9 @@ class FrontEnd {
 
         $this->db->query($sql);
 
-        $this->update_discord_data();
+        return $this->update_discord_data();
       }
+      else return $response;
     }
   }
 
@@ -88,7 +89,7 @@ class FrontEnd {
     if($user_id) {
       $data = $this->fetch_discord_data();
 
-      $sql = "UPDATE discord_users SET discord_id='{$data['id']}', username='{$data['username']}', discriminator='{$data['discriminator']}' WHERE forum_id='{$user_id}'";
+      $sql = "UPDATE discord_users SET discord_id='{$data['id']}', username='{$data['username']}', discriminator='{$data['discriminator']}', avatar='{$data['avatar']}' WHERE forum_id='{$user_id}'";
 
       $this->db->query($sql);
       return $data;

@@ -44,160 +44,35 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $script = __webpack_require__(1);
+	  __webpack_require__(1);
 
 
-	  __webpack_require__(2);
 
 
-	  __webpack_require__(7);
+	  __webpack_require__(5);
 
-	  __webpack_require__(8);
+	  __webpack_require__(6);
+	  __webpack_require__(14);
+	  __webpack_require__(13);
 
 	  __webpack_require__(9);
+
 	  __webpack_require__(10);
+	  __webpack_require__(7);
+	  __webpack_require__(8);
 
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  * $script.js JS loader & dependency manager
-	  * https://github.com/ded/script.js
-	  * (c) Dustin Diaz 2014 | License MIT
-	  */
-
-	(function (name, definition) {
-	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
-	  else if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (definition), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-	  else this[name] = definition()
-	})('$script', function () {
-	  var doc = document
-	    , head = doc.getElementsByTagName('head')[0]
-	    , s = 'string'
-	    , f = false
-	    , push = 'push'
-	    , readyState = 'readyState'
-	    , onreadystatechange = 'onreadystatechange'
-	    , list = {}
-	    , ids = {}
-	    , delay = {}
-	    , scripts = {}
-	    , scriptpath
-	    , urlArgs
-
-	  function every(ar, fn) {
-	    for (var i = 0, j = ar.length; i < j; ++i) if (!fn(ar[i])) return f
-	    return 1
-	  }
-	  function each(ar, fn) {
-	    every(ar, function (el) {
-	      return !fn(el)
-	    })
-	  }
-
-	  function $script(paths, idOrDone, optDone) {
-	    paths = paths[push] ? paths : [paths]
-	    var idOrDoneIsDone = idOrDone && idOrDone.call
-	      , done = idOrDoneIsDone ? idOrDone : optDone
-	      , id = idOrDoneIsDone ? paths.join('') : idOrDone
-	      , queue = paths.length
-	    function loopFn(item) {
-	      return item.call ? item() : list[item]
-	    }
-	    function callback() {
-	      if (!--queue) {
-	        list[id] = 1
-	        done && done()
-	        for (var dset in delay) {
-	          every(dset.split('|'), loopFn) && !each(delay[dset], loopFn) && (delay[dset] = [])
-	        }
-	      }
-	    }
-	    setTimeout(function () {
-	      each(paths, function loading(path, force) {
-	        if (path === null) return callback()
-	        
-	        if (!force && !/^https?:\/\//.test(path) && scriptpath) {
-	          path = (path.indexOf('.js') === -1) ? scriptpath + path + '.js' : scriptpath + path;
-	        }
-	        
-	        if (scripts[path]) {
-	          if (id) ids[id] = 1
-	          return (scripts[path] == 2) ? callback() : setTimeout(function () { loading(path, true) }, 0)
-	        }
-
-	        scripts[path] = 1
-	        if (id) ids[id] = 1
-	        create(path, callback)
-	      })
-	    }, 0)
-	    return $script
-	  }
-
-	  function create(path, fn) {
-	    var el = doc.createElement('script'), loaded
-	    el.onload = el.onerror = el[onreadystatechange] = function () {
-	      if ((el[readyState] && !(/^c|loade/.test(el[readyState]))) || loaded) return;
-	      el.onload = el[onreadystatechange] = null
-	      loaded = 1
-	      scripts[path] = 2
-	      fn()
-	    }
-	    el.async = 1
-	    el.src = urlArgs ? path + (path.indexOf('?') === -1 ? '?' : '&') + urlArgs : path;
-	    head.insertBefore(el, head.lastChild)
-	  }
-
-	  $script.get = create
-
-	  $script.order = function (scripts, id, done) {
-	    (function callback(s) {
-	      s = scripts.shift()
-	      !scripts.length ? $script(s, id, done) : $script(s, callback)
-	    }())
-	  }
-
-	  $script.path = function (p) {
-	    scriptpath = p
-	  }
-	  $script.urlArgs = function (str) {
-	    urlArgs = str;
-	  }
-	  $script.ready = function (deps, ready, req) {
-	    deps = deps[push] ? deps : [deps]
-	    var missing = [];
-	    !each(deps, function (dep) {
-	      list[dep] || missing[push](dep);
-	    }) && every(deps, function (dep) {return list[dep]}) ?
-	      ready() : !function (key) {
-	      delay[key] = delay[key] || []
-	      delay[key][push](ready)
-	      req && req(missing)
-	    }(deps.join('|'))
-	    return $script
-	  }
-
-	  $script.done = function (idOrDone) {
-	    $script([null], idOrDone)
-	  }
-
-	  return $script
-	});
-
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(3);
+	var content = __webpack_require__(2);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
+	var update = __webpack_require__(4)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -214,21 +89,21 @@
 	}
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(4)();
+	exports = module.exports = __webpack_require__(3)();
 	// imports
 
 
 	// module
-	exports.push([module.id, ".discord-main {\n  height: 100vh;\n  margin-top: -100px;\n  padding-top: 150px;\n  position: relative; }\n  .discord-main:before {\n    content: '';\n    background: url(/../wp-content/plugins/SCFR-Discord/app/images/olisar.jpg);\n    background-size: cover;\n    width: 100%;\n    height: 100%;\n    opacity: 0.2;\n    position: absolute;\n    top: 0px;\n    left: 0px; }\n  .discord-main .md-toolbar-tools {\n    font-family: \"Electrolize\";\n    font-weight: bold; }\n", ""]);
+	exports.push([module.id, ".discord-main {\n  height: 100vh;\n  margin-top: -100px;\n  padding-top: 150px;\n  position: relative; }\n  .discord-main:before {\n    content: '';\n    background: url(/../wp-content/plugins/SCFR-Discord/app/images/olisar.jpg);\n    background-size: cover;\n    width: 100%;\n    height: 100%;\n    opacity: 0.2;\n    position: absolute;\n    top: 0px;\n    left: 0px; }\n  .discord-main .md-toolbar-tools {\n    font-family: \"Electrolize\";\n    font-weight: bold; }\n  .discord-main .discord-user-avatar {\n    border-radius: 50%; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 	/*
@@ -284,8 +159,7 @@
 
 
 /***/ },
-/* 5 */,
-/* 6 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -537,28 +411,53 @@
 
 
 /***/ },
-/* 7 */
+/* 5 */
 /***/ function(module, exports) {
 
 	app.service("discord.service.user", ["$http", "$q",  function($http, $q) {
 	  var service = {
 	    userStatus: "USER_NOT_LOGGED_IN",
+	    discord: false,
 	  };
 
-	  if (typeof location.origin === 'undefined') location.origin = location.protocol + '//' + location.host;
-	  var BASE_URL = location.origin + "/wp-json/Discord/";
+	  service.getUserData = function() {
+	    var p = $http.get(DISCORD_API_URL+"RefreshDiscord").then(function(data) {
+	      service.discord = data.data;
 
-	  console.log(BASE_URL);
+	      return service.user;
+	    });
+
+	    return p;
+	  };
 
 	  service.getUserStatus = function() {
-	    var p = $http.get(BASE_URL+"OAuthStatus").then(function(data) {
+	    var p = $http.get(DISCORD_API_URL+"OAuthStatus").then(function(data) {
 	      service.userStatus = data.data;
+	      if(service.userStatus === "USER_OKAY") service.getUserData();
 	      return service.userStatus;
 	    });
 
 	    return p;
 	  };
 
+	  service.authorizeCode = function(code) {
+	    var p = $http.get(DISCORD_API_URL+"Authorize", {params: {code: code}}).then(function(data) {
+	      if(data.data.id) {
+	        service.discord = data.data;
+	        service.userStatus = "USER_OKAY";
+	        return true;
+	      }
+	      return false;
+	    });
+
+	    return p;
+	  };
+
+	  init = function() {
+	    service.getUserStatus();
+	  };
+
+	  init();
 
 
 	  return service;
@@ -566,48 +465,52 @@
 
 
 /***/ },
-/* 8 */
+/* 6 */
 /***/ function(module, exports) {
 
-	app.controller("DiscordMain", ["$scope", "$state", "discord.service.user", function($scope, $state, user) {
+	app.controller("DiscordMain", ["$scope", "$state", function($scope, $state) {
 	  console.log($state.params);
+
+	  $scope.appURL = DISCORD_APP_URL;
 	  //ngMaterial
 	}]);
 
 
 /***/ },
-/* 9 */
+/* 7 */
 /***/ function(module, exports) {
 
-	app.config(["$stateProvider", "$locationProvider", function($stateProvider, $locationProvider) {
+	app.config(["$stateProvider", "$locationProvider", "$urlRouterProvider", function($stateProvider, $locationProvider, $urlRouterProvider) {
 
 	  var LOCAL_PATH = HUBPATH+"../../../plugins/SCFR-Discord/app/template/";
 
 	  //$locationProvider.html5Mode(true);
 
+
 	  $stateProvider.state('Discord', {
-	    url: '/Discord/',
-	    templateUrl: LOCAL_PATH+"/main.html",
+	    url:'',
+	    abstract:true,
 	    controller: "DiscordMain",
+	    templateUrl: LOCAL_PATH+"/main.html",
 	  });
 
-	  $stateProvider.state('Discord.bn', {
-	    url: 'bn',
-	    templateUrl: LOCAL_PATH+"/main.html",
-	    controller: "DiscordMain",
+	  $stateProvider.state('Discord.index', {
+	    url: '/Discord/',
+	    templateUrl: LOCAL_PATH+"/accueil.html",
 	  });
 
 	  $stateProvider.state('Discord.authorize', {
-	    url: 'Authorize/?code',
-	    templateUrl: LOCAL_PATH+"/main.html",
+	    url: '/Discord/Authorize/?code',
+	    templateUrl: LOCAL_PATH+"/authorize.html",
 	    controller: "DiscordAuthorize",
 	  });
 
+	  $urlRouterProvider.otherwise('/Discord/');
 	}]);
 
 
 /***/ },
-/* 10 */
+/* 8 */
 /***/ function(module, exports) {
 
 	angular.module("starCitizen").requires.push('ngMaterial');
@@ -692,7 +595,7 @@
 	        '500': '#26323a',
 	        '600': '#1c252b',
 	        '700': '#12171b',
-	        '800': '#080a0c',
+	        '800': '#282e31',
 	        '900': '#000000',
 	        'A100': '#638296',
 	        'A200': '#718ea2',
@@ -710,6 +613,91 @@
 	        .backgroundPalette('customBackground').dark();
 
 
+	}]);
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	app.directive("discordMainUserCard", function() {
+	  return {
+	    templateUrl: DISCORD_APP_URL+"template/common/user-card.html",
+	    restrict:'E',
+	    controller:'DiscordUserCard',
+	    replace: true,
+	  };
+	});
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(11)(__webpack_require__(12))
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	module.exports = function(src) {
+		if (typeof execScript !== "undefined")
+			execScript(src);
+		else
+			eval.call(null, src);
+	}
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "if (typeof location.origin === 'undefined') location.origin = location.protocol + '//' + location.host;\r\nvar DISCORD_API_URL = location.origin + \"/wp-json/Discord/\";\r\nvar DISCORD_APP_URL = location.origin + \"/wp-content/plugins/SCFR-Discord/app/\";\r\n"
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	app.controller("DiscordUserCard", ["$scope", "$state", "discord.service.user", "$stateParams", function($scope, $state, user, $stateParams) {
+	  $scope.user = user;
+
+
+	  $scope.status = function() {
+	    if(user.userStatus === "USER_OKAY") return "Votre compte discord est connecté à votre compte SC.FR. Vous pouvez profiter pleinement de nos services et plugins.";
+	    else if($stateParams.code) return "Traitement en cours...";
+	    else if(user.userStatus === "USER_NO_TOKEN") return "Clickez sur le bouton discord pour connecter votre compte Discord à SC.FR";
+	    return "Veuillez vous connectez.";
+	  };
+
+	  $scope.getDiscordCode = function() {
+	    document.location.href = DISCORD_API_URL+"Connect";
+	  };
+
+	  handleCode = function() {
+	    $scope.busy = true;
+	    user.authorizeCode($stateParams.code).then(function(ok) {
+	      if(ok) {
+	        $stateParams.code = false;
+	        $scope.busy = false;
+	      }
+	    });
+	  };
+
+	  if($stateParams.code) handleCode();
+
+	}]);
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	app.controller("DiscordAuthorize", ["$scope", "$state",  function($scope, $state) {
+	  console.log($state);
 	}]);
 
 

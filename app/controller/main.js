@@ -1,4 +1,6 @@
-app.controller("DiscordMain", ["$scope", "$state", "discord.service.user", function($scope, $state, user) {
+app.controller("DiscordMain", ["$scope", "$state", function($scope, $state) {
   console.log($state.params);
+
+  $scope.appURL = DISCORD_APP_URL;
   //ngMaterial
 }]);

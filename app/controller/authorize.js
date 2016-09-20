@@ -1,3 +1,3 @@
-app.controller("DiscordMain", ["$scope", "$state", "$stateparams",  function($scope, $state, $stateparams) {
-  console.log($stateparams);
+app.controller("DiscordAuthorize", ["$scope", "$state",  function($scope, $state) {
+  console.log($state);
 }]);
