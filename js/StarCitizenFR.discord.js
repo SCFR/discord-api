@@ -52,14 +52,14 @@
 	  __webpack_require__(5);
 
 	  __webpack_require__(6);
-	  __webpack_require__(14);
-	  __webpack_require__(13);
+	  __webpack_require__(7);
+	  __webpack_require__(8);
 
 	  __webpack_require__(9);
 
 	  __webpack_require__(10);
-	  __webpack_require__(7);
-	  __webpack_require__(8);
+	  __webpack_require__(13);
+	  __webpack_require__(14);
 
 
 /***/ },
@@ -480,6 +480,91 @@
 /* 7 */
 /***/ function(module, exports) {
 
+	app.controller("DiscordAuthorize", ["$scope", "$state",  function($scope, $state) {
+	  console.log($state);
+	}]);
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	app.controller("DiscordUserCard", ["$scope", "$state", "discord.service.user", "$stateParams", function($scope, $state, user, $stateParams) {
+	  $scope.user = user;
+
+
+	  $scope.status = function() {
+	    if(user.userStatus === "USER_OKAY") return "Votre compte discord est connecté à votre compte SC.FR. Vous pouvez profiter pleinement de nos services et plugins.";
+	    else if($stateParams.code) return "Traitement en cours...";
+	    else if(user.userStatus === "USER_NO_TOKEN") return "Clickez sur le bouton discord pour connecter votre compte Discord à SC.FR";
+	    return "Veuillez vous connectez.";
+	  };
+
+	  $scope.getDiscordCode = function() {
+	    document.location.href = DISCORD_API_URL+"Connect";
+	  };
+
+	  handleCode = function() {
+	    $scope.busy = true;
+	    user.authorizeCode($stateParams.code).then(function(ok) {
+	      if(ok) {
+	        $stateParams.code = false;
+	        $scope.busy = false;
+	      }
+	    });
+	  };
+
+	  if($stateParams.code) handleCode();
+
+	}]);
+
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	app.directive("discordMainUserCard", function() {
+	  return {
+	    templateUrl: DISCORD_APP_URL+"template/common/user-card.html",
+	    restrict:'E',
+	    controller:'DiscordUserCard',
+	    replace: true,
+	  };
+	});
+
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(11)(__webpack_require__(12))
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	module.exports = function(src) {
+		if (typeof execScript !== "undefined")
+			execScript(src);
+		else
+			eval.call(null, src);
+	}
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "if (typeof location.origin === 'undefined') location.origin = location.protocol + '//' + location.host;\r\nvar DISCORD_API_URL = location.origin + \"/wp-json/Discord/\";\r\nvar DISCORD_APP_URL = location.origin + \"/wp-content/plugins/SCFR-Discord/app/\";\r\n"
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
 	app.config(["$stateProvider", "$locationProvider", "$urlRouterProvider", function($stateProvider, $locationProvider, $urlRouterProvider) {
 
 	  var LOCAL_PATH = HUBPATH+"../../../plugins/SCFR-Discord/app/template/";
@@ -510,7 +595,7 @@
 
 
 /***/ },
-/* 8 */
+/* 14 */
 /***/ function(module, exports) {
 
 	angular.module("starCitizen").requires.push('ngMaterial');
@@ -613,91 +698,6 @@
 	        .backgroundPalette('customBackground').dark();
 
 
-	}]);
-
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	app.directive("discordMainUserCard", function() {
-	  return {
-	    templateUrl: DISCORD_APP_URL+"template/common/user-card.html",
-	    restrict:'E',
-	    controller:'DiscordUserCard',
-	    replace: true,
-	  };
-	});
-
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(11)(__webpack_require__(12))
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	module.exports = function(src) {
-		if (typeof execScript !== "undefined")
-			execScript(src);
-		else
-			eval.call(null, src);
-	}
-
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-	module.exports = "if (typeof location.origin === 'undefined') location.origin = location.protocol + '//' + location.host;\r\nvar DISCORD_API_URL = location.origin + \"/wp-json/Discord/\";\r\nvar DISCORD_APP_URL = location.origin + \"/wp-content/plugins/SCFR-Discord/app/\";\r\n"
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-	app.controller("DiscordUserCard", ["$scope", "$state", "discord.service.user", "$stateParams", function($scope, $state, user, $stateParams) {
-	  $scope.user = user;
-
-
-	  $scope.status = function() {
-	    if(user.userStatus === "USER_OKAY") return "Votre compte discord est connecté à votre compte SC.FR. Vous pouvez profiter pleinement de nos services et plugins.";
-	    else if($stateParams.code) return "Traitement en cours...";
-	    else if(user.userStatus === "USER_NO_TOKEN") return "Clickez sur le bouton discord pour connecter votre compte Discord à SC.FR";
-	    return "Veuillez vous connectez.";
-	  };
-
-	  $scope.getDiscordCode = function() {
-	    document.location.href = DISCORD_API_URL+"Connect";
-	  };
-
-	  handleCode = function() {
-	    $scope.busy = true;
-	    user.authorizeCode($stateParams.code).then(function(ok) {
-	      if(ok) {
-	        $stateParams.code = false;
-	        $scope.busy = false;
-	      }
-	    });
-	  };
-
-	  if($stateParams.code) handleCode();
-
-	}]);
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	app.controller("DiscordAuthorize", ["$scope", "$state",  function($scope, $state) {
-	  console.log($state);
 	}]);
 
 
