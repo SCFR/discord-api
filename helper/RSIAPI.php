@@ -1,7 +1,7 @@
 <?php namespace SCFRDiscord\helper;
   class RSIAPI {
     public static function get_latest_org_info($target, $end_date = 0, $target_2 = 1) {
-      require_once("C:\Users\David\OneDrive\Dev\GitHub\SCFR/API/RSI/sc_api/database_layer/DBInterface.php");
+      require_once(dirname(__FILE__)."/../../../../API/RSI/sc_api/database_layer/DBInterface.php");
 
       if($end_date === 0) $end_date = time();
       $db = new \thalos_api\DBInterface();
