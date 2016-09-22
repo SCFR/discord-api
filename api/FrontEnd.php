@@ -66,7 +66,7 @@ class FrontEnd {
 
   public function authorize($args) {
     $user_id = $this->get_forum_id();
-    if($user_id) {
+    if($user_id && $this->oauth_status() == "USER_NO_TOKEN") {
       $client = new \OAuth2\Client(\SCFRDiscord\Settings::DISCORD_ID, \SCFRDiscord\Settings::DISCORD_PRIVATE);
       $params = array('code' => $args['code'], 'redirect_uri' => \SCFRDiscord\Settings::DISCORD_URI);
       $response = $client->getAccessToken("https://discordapp.com/api/oauth2/token", 'authorization_code', $params);
