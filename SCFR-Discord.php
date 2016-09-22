@@ -24,7 +24,7 @@ namespace SCFRDiscord;
   require_once('helper/User.php');
   require_once('helper/Org.php');
   require_once('helper/RSIAPI.php');
-  require_once('listener/event.php');
+  require_once('listener/Event.php');
 
     global $SCFRDiscord;
 
